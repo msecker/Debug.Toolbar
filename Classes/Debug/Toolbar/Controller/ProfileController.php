@@ -2,7 +2,7 @@
 namespace Debug\Toolbar\Controller;
 
 /*                                                                        *
- * This script belongs to the FLOW3 package "Debug.Toolbar".              *
+ * This script belongs to the TYPO3 Flow package "Debug.Toolbar".         *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License, either version 3   *
@@ -27,19 +27,6 @@ class ProfileController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 * @return void
 	 */
 	public function indexAction() {
-		// $dataRenderers = array(
-
-		// );
-		// foreach ($this->debugger->getDebuggers() as $dataRenderer) {
-		//     $dataRenderers[$dataRenderer->getName()] = $dataRenderer;
-		// }
-		// $this->view->assign('dataRenderers', $dataRenderers);
-		// if ($this->request->hasArgument('token')) {
-		//     $this->view->assign('token', $this->request->getArgument('token'));
-		//     \Debug\Toolbar\Service\DataStorage::load($this->request->getArgument('token'));
-		//     \Debug\Toolbar\Service\DataStorage::freeze();
-		// }
-
 		if ($this->request->hasArgument('token')) {
 			$this->view->assign('token', $this->request->getArgument('token'));
 			\Debug\Toolbar\Service\DataStorage::load($this->request->getArgument('token'));
@@ -61,13 +48,6 @@ class ProfileController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 		$this->view->assign('currentModule', $currentModule);
 
 		$this->view->assign('modules', $modules);
-	}
-
-	/**
-	 * TODO: Document this Method!
-	 */
-	public function testAction() {
-		$this->redirectToUri('http://phoenix/typo3/management');
 	}
 
 }

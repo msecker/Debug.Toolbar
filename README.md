@@ -1,6 +1,6 @@
-## Debug Toolbar for FLOW3
+## Debug Toolbar for TYPO3 Flow
 
-This is an Debugging Tool for FLOW3 heavily inspired by http://symfony.com/blog/towards-symfony-2-1-the-new-web-debug-toolbar.
+This is an Debugging Tool for TYPO3 FLow heavily inspired by http://symfony.com/blog/towards-symfony-2-1-the-new-web-debug-toolbar.
 Consider this a Prototype for now, although it's already quite usable.
 
 ![FDT](http://dl.dropbox.com/u/314491/FDT.png)
@@ -27,7 +27,7 @@ You can add some RegEx's to your Settings to enable Profiling of some Classes an
 For Changes to take affect you need to clear you cache!
 
 
-The Icons and the general look is currently heavily based on the Symfony2 WDT and will in time be polished to integrate into the FLOW3 Style. If you would like to help style this baby feel free to drop me a line apocalip@gmail.com
+The Icons and the general look is currently heavily based on the Symfony2 WDT and will in time be polished to integrate into the Flow style. If you would like to help style this baby feel free to drop me a line apocalip@gmail.com
 
 ## Icons License
 https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/WebProfilerBundle/Resources/ICONS_LICENSE.txt

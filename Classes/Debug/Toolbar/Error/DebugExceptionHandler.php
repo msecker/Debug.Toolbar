@@ -2,7 +2,7 @@
 namespace Debug\Toolbar\Error;
 
 /*                                                                        *
- * This script belongs to the FLOW3 package "Debug.Toolbar".              *
+ * This script belongs to the TYPO3 Flow package "Debug.Toolbar".         *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License, either version 3   *
