@@ -75,34 +75,16 @@ class SqlDebugger {
 		if (empty($merged)) {
 			return $merged;
 		}
-		$keywords = array(
-			'SELECT' => '<b>SELECT</b>',
-			'FROM' => chr(10) . '<b>FROM</b>',
-			'WHERE' => chr(10) . '<b>WHERE</b>',
-			'LEFT JOIN' => chr(10) . '<b>LEFT JOIN</b>',
-			'RIGHT JOIN' => chr(10) . '<b>RIGHT JOIN</b>',
-			'LIMIT' => chr(10) . '<b>LIMIT</b>',
-			'AS' => '<b>AS</b>',
-			'DISTINCT' => '<b>DISTINCT</b>'
-		);
 		foreach ($merged as $key => $value) {
-			$parts = explode('?', $value['query']);
-			$newQuery = '';
-			foreach ($parts as $position => $part) {
-				$newQuery .= $part;
-				if (isset($value['types'][$position])) {
-					switch ($value['types'][$position]) {
-						case 'string':
-							$newQuery .= ('"' . $value['params'][$position]) . '"';
-							break;
-						default:
-							break;
-					}
-				}
-			}
-			// $newQuery = str_replace(array_keys($keywords), array_values($keywords), $newQuery);
-			$newQuery = \SqlFormatter::format($newQuery);
-			$merged[$key]['query'] = $newQuery;
+			$params = $value['params'];
+			$paramIndex = 0;
+			$query = preg_replace_callback('/\?/', function() use ($params, &$paramIndex) {
+				$paramValue = $params[$paramIndex];
+				$paramIndex ++;
+				return '"' . $paramValue . '"';
+			}, $value['query']);
+			$query = \SqlFormatter::format($query);
+			$merged[$key]['query'] = $query;
 		}
 		return $merged;
 	}
