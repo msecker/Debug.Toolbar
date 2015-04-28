@@ -81,7 +81,17 @@ class SqlDebugger {
 			$query = preg_replace_callback('/\?/', function() use ($params, &$paramIndex) {
 				$paramValue = $params[$paramIndex];
 				$paramIndex ++;
-				return '"' . $paramValue . '"';
+				if (is_string($paramValue)) {
+					$paramValue = '"' . $paramValue . '"';
+				} elseif (is_bool($paramValue)) {
+				} elseif ($paramValue instanceof \DateTime) {
+					$paramValue = $paramValue->format(\DateTime::ISO8601);
+				} elseif (is_object($paramValue) && method_exists($paramValue, '__toString')) {
+					$paramValue = '"' . $paramValue . '"';
+				} elseif (!is_numeric($paramValue) && !is_bool($paramValue)) {
+					$paramValue = '[' . gettype($paramValue) . ']';
+				}
+				return $paramValue;
 			}, $value['query']);
 			$query = \SqlFormatter::format($query);
 			$merged[$key]['query'] = $query;
