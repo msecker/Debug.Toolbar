@@ -21,12 +21,14 @@ class LoggingDebugger {
 	public function preToolbarRendering() {
 		$logDir = FLOW_PATH_DATA . 'Logs/';
 		$logFiles = scandir($logDir);
+		$totalNumberOfLines = 0;
 		$logs = array();
 		foreach ($logFiles as $logFile) {
 			if (pathinfo($logFile, PATHINFO_EXTENSION) !== 'log') {
 				continue;
 			}
 			$lines = file($logDir . '/' . $logFile);
+			$totalNumberOfLines += count($lines);
 			$lines = array_slice($lines, -200);
 			foreach ($lines as $key => $line) {
 				$loggingLevels = array(
@@ -46,8 +48,9 @@ class LoggingDebugger {
 		}
 		\Debug\Toolbar\Service\Collector::getModule('Logging')
 			->getToolbar()
+			->setPriority(70)
 			->addIcon('list-alt')
-			->addText('Logging')
+			->addText($totalNumberOfLines)
 			->getPopup()
 			->setClass('fullscreen')
 			->addPartial('Logging', array('logs' => $logs))

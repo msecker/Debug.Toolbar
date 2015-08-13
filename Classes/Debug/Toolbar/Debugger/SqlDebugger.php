@@ -52,14 +52,15 @@ class SqlDebugger {
 
 		\Debug\Toolbar\Service\Collector::getModule('Sql')
 			->getToolbar()
+			->setPriority(60)
 			->addIcon('hdd')
-			->addBadge(count($queries))
+			->addText(count($queries))
 			->getPopup()
-			->addPartial('Sql/Statistic', array(
-			'time' => array_sum($times),
-			'queries' => $merged,
-			'queriesCount' => count($queries)
-		))
+			->addHtml('<h4>SQL</h4>')
+				->addTable(array(
+				'queries' => count($queries),
+				'time' => number_format(array_sum($times), 4) . 's',
+			))
 			->getPanel()
 			->addPartial('Sql/Queries', array(
 			'time' => array_sum($times),
@@ -79,7 +80,7 @@ class SqlDebugger {
 			$params = $value['params'];
 			$paramIndex = 0;
 			$query = preg_replace_callback('/\?/', function() use ($params, &$paramIndex) {
-				$paramValue = $params[$paramIndex];
+				$paramValue = isset($params[$paramIndex]) ? $params[$paramIndex] : NULL;
 				$paramIndex ++;
 				if (is_string($paramValue)) {
 					$paramValue = '"' . $paramValue . '"';

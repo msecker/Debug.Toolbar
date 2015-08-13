@@ -76,6 +76,7 @@ class RequestHandler extends \TYPO3\Flow\Http\RequestHandler {
 			return;
 		}
 
+		DataStorage::set('Runtime:Start', microtime(TRUE));
 		DataStorage::add('Request:Requests', $actionRequest);
 		DataStorage::add('Request:Responses', $this->response);
 		View::handleRedirects($this->request, $this->response);

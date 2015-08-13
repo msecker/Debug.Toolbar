@@ -1,8 +1,8 @@
 <?php
-namespace Debug\Toolbar\Debugger;
+namespace Debug\Toolbar\Http;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Debug.Toolbar".         *
+ * This script belongs to the TYPO3 Flow framework.                       *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License, either version 3   *
@@ -11,27 +11,23 @@ namespace Debug\Toolbar\Debugger;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Debug\Toolbar\Service\DataStorage;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Http\Component\ComponentContext;
+use TYPO3\Flow\Http\Component\ComponentInterface;
 
 /**
+ * ...
  */
-class ViewsDebugger {
+class InitComponent implements ComponentInterface {
 
 	/**
-	 * TODO: Document this Method! ( assignVariables )
+	 * @param ComponentContext $componentContext
+	 * @return void
 	 */
-	public function preToolbarRendering() {
-		$views = \Debug\Toolbar\Service\DataStorage::get('Views');
-
-		\Debug\Toolbar\Service\Collector::getModule('Views')
-			->setPriority(50)
-			->getToolbar()
-			->addIcon('eye-open')
-			->addText(count($views))
-			->getPopup()
-			->addHtml('<h4>Views.yaml</h4>')
-			->addPartial('View', array('views' => $views));
+	public function handle(ComponentContext $componentContext) {
+		DataStorage::set('Runtime:Start', microtime(TRUE));
+		DataStorage::save();
 	}
-}
 
-?>
+}

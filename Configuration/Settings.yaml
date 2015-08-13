@@ -6,13 +6,15 @@ TYPO3:
   Flow:
     persistence:
       doctrine:
-        sqlLogger: Debug\Toolbar\Logger\SqlLogger
-    # error:
-    #   exceptionHandler:
-    #     className: 'Debug\Toolbar\Error\DebugExceptionHandler'
+        sqlLogger: 'Debug\Toolbar\Logger\SqlLogger'
 
     http:
       chain:
+        'process':
+          chain:
+            'initdebugging':
+              position: 'before dispatching'
+              component: 'Debug\Toolbar\Http\InitComponent'
 
         'postprocess':
           chain:

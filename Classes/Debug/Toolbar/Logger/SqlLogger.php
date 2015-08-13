@@ -45,10 +45,16 @@ class SqlLogger extends \TYPO3\Flow\Persistence\Doctrine\Logging\SqlLogger {
 			if (!isset($value['class'])) {
 				continue;
 			}
-			if (stristr($value['class'], 'Doctrine\\')) {
+			if (strpos($value['class'], 'Doctrine\\') === 0) {
 				continue;
 			}
-			if (stristr($value['class'], 'TYPO3\\Flow')) {
+			if (strpos($value['class'], 'TYPO3\\Flow') === 0) {
+				continue;
+			}
+			if (strpos($value['class'], 'Closure') === 0) {
+				continue;
+			}
+			if (strpos($value['function'], 'Flow_') === 0) {
 				continue;
 			}
 			DataStorage::add('SqlLogger:Origins', $value);

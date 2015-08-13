@@ -67,9 +67,10 @@ class AopDebugger {
 
 		\Debug\Toolbar\Service\Collector::getModule('AOP')
 			->getToolbar()
-			->addText('AOP')
-			->addBadge(count($advices))
+			->addIcon('random')
+			->addText(count($advices))
 			->getPopup()
+			->addHtml('<h4>AOP</h4>')
 			->addHtml($table)
 			->getPanel()
 			->addHtml($table);

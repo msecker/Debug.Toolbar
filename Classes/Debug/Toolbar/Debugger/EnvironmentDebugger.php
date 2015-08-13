@@ -43,20 +43,26 @@ class EnvironmentDebugger {
 
 		$memoryUsage = (memory_get_peak_usage(TRUE) / 1024) / 1024;
 		$memoryUsage = number_format($memoryUsage, 1) . ' MB';
+		$runtime = microtime(TRUE) - \Debug\Toolbar\Service\DataStorage::get('Runtime:Start');
+		$runtime = number_format($runtime, 4) . ' s';
 
 		\Debug\Toolbar\Service\Collector::getModule('Environment')
 			->getToolbar()
-				// ->addHtml('<img height="20" alt="Memory Usage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAcBAMAAABITyhxAAAAJ1BMVEXNzc3///////////////////////8/Pz////////////+NjY0/Pz9lMO+OAAAADHRSTlMAABAgMDhAWXCvv9e8JUuyAAAAQ0lEQVQI12MQBAMBBmLpMwoMDAw6BxjOOABpHyCdAKRzsNDp5eXl1KBh5oHBAYY9YHoDQ+cqIFjZwGCaBgSpBrjcCwCZgkUHKKvX+wAAAABJRU5ErkJggg==">')
+			#->addHtml('<img height="20" alt="Memory Usage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAcBAMAAABITyhxAAAAJ1BMVEXNzc3///////////////////////8/Pz////////////+NjY0/Pz9lMO+OAAAADHRSTlMAABAgMDhAWXCvv9e8JUuyAAAAQ0lEQVQI12MQBAMBBmLpMwoMDAw6BxjOOABpHyCdAKRzsNDp5eXl1KBh5oHBAYY9YHoDQ+cqIFjZwGCaBgSpBrjcCwCZgkUHKKvX+wAAAABJRU5ErkJggg==">')
 			->addIcon('info-sign')
+			->setPriority(80)
 			->addText($memoryUsage)
 			->getPopup()
+			->addHtml('<h4>Environment</h4>')
 			->addTable(array(
+			'Runtime' => $runtime,
 			'PHP Version' => PHP_VERSION,
 			'Flow Context' => $this->objectManager->getContext(),
 			'Flow Version' => FLOW_VERSION_BRANCH
 		))
 			->getPanel()
 			->addTable(array(
+			'Runtime' => $runtime,
 			'PHP Version' => PHP_VERSION,
 			'Flow Context' => $this->objectManager->getContext(),
 			'Flow Version' => FLOW_VERSION_BRANCH

@@ -1,8 +1,16 @@
 #                                                                        #
-# Default subroutes configuration for the Blog package                   #
+# Default subroutes configuration for the Debug.Toolbar package          #
 #                                                                        #
-
-# $Id: Routes.yaml 3886 2010-02-28 17:03:50Z robert $
+#
+# Include them to your project by adding the following snippet *above* other
+# route definitions in the main Routes.yaml:
+#
+#-
+#  name: 'DebugToolbar'
+#  uriPattern: '<DebugToolbarSubroutes>'
+#  subRoutes:
+#    'DebugToolbarSubroutes':
+#      package: Debug.Toolbar
 
 -
   name: 'Profiles'

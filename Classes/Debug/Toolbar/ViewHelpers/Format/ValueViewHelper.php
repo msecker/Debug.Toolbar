@@ -1,5 +1,5 @@
 <?php
-namespace Debug\Toolbar\Debugger;
+namespace Debug\Toolbar\ViewHelpers\Format;
 
 /*                                                                        *
  * This script belongs to the TYPO3 Flow package "Debug.Toolbar".         *
@@ -12,26 +12,33 @@ namespace Debug\Toolbar\Debugger;
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Utility\TypeHandling;
+use TYPO3\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 /**
+ * A simple ViewHelper to render a value independently of its type
  */
-class ViewsDebugger {
+class ValueViewHelper extends AbstractConditionViewHelper {
 
 	/**
-	 * TODO: Document this Method! ( assignVariables )
+	 * @var boolean
 	 */
-	public function preToolbarRendering() {
-		$views = \Debug\Toolbar\Service\DataStorage::get('Views');
+	protected $escapeChildren = FALSE;
 
-		\Debug\Toolbar\Service\Collector::getModule('Views')
-			->setPriority(50)
-			->getToolbar()
-			->addIcon('eye-open')
-			->addText(count($views))
-			->getPopup()
-			->addHtml('<h4>Views.yaml</h4>')
-			->addPartial('View', array('views' => $views));
+	/**
+	 * @param mixed $value
+	 * @return string the rendered string
+	 */
+	public function render($value = NULL) {
+		if ($value === NULL) {
+			$value = $this->renderChildren();
+		}
+		if (is_object($value)) {
+			return '[' . TypeHandling::getTypeForValue($value) . ']';
+		}
+		return (string)$value;
 	}
+
 }
 
 ?>

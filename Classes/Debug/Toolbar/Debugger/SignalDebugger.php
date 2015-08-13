@@ -33,8 +33,8 @@ class SignalDebugger {
 			$classes = $this->sanitize($classes);
 			\Debug\Toolbar\Service\Collector::getModule('Signals')
 				->getToolbar()
-				->addText('Signals')
-				->addBadge(count($classes))
+				->addIcon('bullhorn')
+				->addText(count($classes))
 				->getPopup()
 				->addPartial('Signals', array(
 				'classes' => $classes

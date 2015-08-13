@@ -211,6 +211,15 @@ class Module {
 	}
 
 	/**
+	 * @param string $tooltipText
+	 * @return \Debug\Toolbar\Core\Module
+	 */
+	public function setTooltip($tooltipText) {
+		$this->context->setTooltip($tooltipText);
+		return $this;
+	}
+
+	/**
 	 * @param string $class
 	 * @return \Debug\Toolbar\Core\Module
 	 */

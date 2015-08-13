@@ -10,7 +10,7 @@
 							<f:render partial="List" arguments="{array: value}" />
 						</f:then>
 						<f:else>
-							{value}
+							{value -> d:format.value()}
 						</f:else>
 					</d:isArray>
 				</li>

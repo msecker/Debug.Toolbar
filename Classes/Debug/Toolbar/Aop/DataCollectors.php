@@ -97,15 +97,6 @@ class DataCollectors {
 		$tag = ($joinPoint->getClassName() . '::') . $joinPoint->getMethodName();
 		$run->stopTimer($tag);
 	}
-
-	/**
-	 * @param \TYPO3\Flow\Aop\JoinPointInterface $joinPoint
-	 * @Flow\Before("method(TYPO3\Flow\Http\RequestHandler->handleRequest())")
-	 * @return void
-	 */
-	public function setStartTime(\TYPO3\Flow\Aop\JoinPointInterface $joinPoint) {
-		\Debug\Toolbar\Service\DataStorage::set('Runtime:Start', microtime());
-	}
 }
 
 ?>

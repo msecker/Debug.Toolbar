@@ -1,6 +1,6 @@
-## Debug Toolbar for TYPO3 Flow
+## Debug Toolbar for Flow
 
-This is an Debugging Tool for TYPO3 FLow heavily inspired by http://symfony.com/blog/towards-symfony-2-1-the-new-web-debug-toolbar.
+This is an Debugging Tool for FLow heavily inspired by http://symfony.com/blog/towards-symfony-2-1-the-new-web-debug-toolbar.
 Consider this a Prototype for now, although it's already quite usable.
 
 ![FDT](http://dl.dropbox.com/u/314491/FDT.png)
