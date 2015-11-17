@@ -1,13 +1,9 @@
-privilegeTargets:
-
-  'TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
-    'Debug.Toolbar:ProfileController':
-      matcher: 'method(Debug\Toolbar\Controller\ProfileController->(?<!initialize).*Action())'
-
-roles:
-
-  'TYPO3.Flow:Everybody':
-    privileges:
-      -
-        privilegeTarget: 'Debug.Toolbar:ProfileController'
-        permission: GRANT
+resources:
+  methods:
+    Debug_Toolbar_ProfileController:
+      'method(Debug\Toolbar\Controller\ProfileController->(?<!initialize).*Action())'
+      
+acls:
+  Everybody:
+    methods:
+      Debug_Toolbar_ProfileController:    GRANT
